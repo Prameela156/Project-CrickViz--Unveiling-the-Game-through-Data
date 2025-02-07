@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <script src="histogram.js"></script>
+    <script src="donut.js"></script>
+    <script src="radar.js"></script>
+    <script src="linechart.js"></script>
+    <script src="bubble.js"></script>
+    <div >
+        <div class="homeSection">
+            <div class="homeSectionInfo">
+                <h1>CrickViz: Unveiling the Game through Data</h1>
+                <p>Welcome to our interactive IPL Data Visualization platform, where cricket enthusiasts and analysts can explore player performances and match dynamics like never before. Dive into over 15 years of IPL history, visualized through dynamic charts that make complex data easy to understand. From career highlights and seasonal trends to detailed match statistics, our platform uses innovative visualizations such as Bubble Charts, Line Graphs, Donut Charts, and Radar Charts to bring the numbers to life. Engage with the data, uncover hidden patterns, and gain new insights into your favorite players and teams, all in an intuitive and user-friendly experience.</p>
+        
+            </div>
+        </div>
+        <div class="bubbleChart">
+            <h1>Bubble chart</h1>
+            <p>This interactive bubble chart provides a comprehensive visualization of IPL batsmen's career statistics, offering
+                insights into their performance based on key metrics. Each bubble in the chart represents an individual batsman, with
+                the following attributes visually encoded:</p>
+                <p><strong>Y-Position:</strong> Represents the batsman's batting average, highlighting consistency across their career.</p>
+                <p><strong>Radius of the Bubble:</strong> Proportional to the total runs scored, emphasizing the overall contribution of each batsman.</p>
+                <p><strong>Color of the Bubble:</strong> Indicates the strike rate, with a gradient scale reflecting the batsman's scoring speed.</p>   
+        </div>
+    </div>
+    <div style="padding: 15px; display: flex;">
+    <div id="plot"></div>
+    <div style="display: flex; flex-direction: column; justify-content: center; text-align: center; ">
+        <div style="padding-bottom: 50px;">
+            <label for="player-select">Search Player: </label>
+            <select id="player-select">
+                <option value="" disabled selected>Choose a player</option>
+            </select>
+        </div>
+        <div id="compare-container">
+            <button class="popup-button" id="compare-button" style="width: 150px;" onclick="compareAllButtonClick(event)">Compare All Stats</button>
+            <button class="popup-button" id="compare-line-button" style="width: 150px;" onclick="compareYearlyButtonClick(event)">Compare Yearly Score</button>
+        </div>
+        <!-- <div id="player-list-container">
+            <ul id="player-list"></ul>
+        </div> -->
+    </div>
+    <div id="popup" class="hidden">
+        <div id="popup-content">
+            <span id="popup-close">&times;</span>
+            <h2 id="popup-title"></h2>
+            <div style="display: flex;">
+            <div style="width: 200px">
+                <button class="popup-button" id="popup-button" style="width: 150px;" onclick="popUpButtonClick(event)">Show Bowling Stats</button>
+                <!-- <button class="popup-button" id="popup-bowling-stats" style="width: 150px;">bowling stats</button> -->
+            </div>
+            <div id="popup-visualizations"></div> 
+            </div>
+        </div>
+    </div>
+    <div id="compare-all-popup" class="hidden">
+        <div id="compare-all-popup-content">
+            <span id="compare-all-popup-close">&times;</span>
+            <h2 id="compare-all-popup-title"></h2>
+            <div style="display: flex;">
+                <!-- <div style="width: 200px">
+                    <button class="compare-all-popup-button" id="compare-all-popup-button" style="width: 150px;" onclick="popUpButtonClick(event)">Show Bowling Stats</button>
+                    <button class="popup-button" id="popup-bowling-stats" style="width: 150px;">bowling stats</button>
+                </div> -->
+                <div id="compare-all-popup-visualizations"></div>
+                <div class="radar_container">
+                    <div class="dropdown-radar_container">
+                        Select Players
+                        <button id="radar_dropdown-button">Select Players</button>
+                        <div class="radar_dropdown-content" id="radar_dropdown-content">
+                        </div>
+                    </div>
+                    <div class="radar_graph" id="radar_graph">
+                        <div class="radar_tooltip" id="radar_tooltip"
+                            style="display:none; position: absolute; background: lightgrey; padding: 5px; border-radius: 5px; font-size: 12px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="compare-yearly-popup" class="popup hidden">
+        <div id="compare-yearly-popup-content">
+            <span id="compare-yearly-popup-close">&times;</span>
+            <h2 id="compare-yearly-popup-title"></h2>
+            <div>
+                <!-- <div style="width: 200px">
+                        <button class="compare-all-popup-button" id="compare-all-popup-button" style="width: 150px;" onclick="popUpButtonClick(event)">Show Bowling Stats</button>
+                        <button class="popup-button" id="popup-bowling-stats" style="width: 150px;">bowling stats</button>
+                    </div> -->
+                <div id="compare-yearly-popup-visualizations" style="display: flex;">
+                <div class="team-dropdown">
+                    <label for="teamDropdown">Check Player Stats Against Team:</label>
+                    <select id="teamDropdown">
+                        <option value="AllTeams">All Teams</option>
+                    </select>
+                </div>
+                <div class="controls">
+                    <div class="player-dropdown">
+                        <label for="playerDropdown">Select Player:</label>
+                        <select id="playerDropdown"></select>
+                        <button id="addPlayerButton">Add Player</button>
+                    </div>
+                    <div id="selectedPlayers" class="selected-players"></div>
+                </div>
+                </div>
+                <div class="chart-container" style="display: flex;">
+                    <div id="linechart-container">
+                        <svg width="800" height="500"></svg>
+                    </div>
+                    <div id="areachart-container">
+                        <svg width="800" height="500"></svg>
+                    </div>
+                    <div id="legend-container"></div>
+                </div>
+                <!-- <div id="legend-container"></div> -->
+            </div>
+        </div>
+    </div>
+    </div>  
+    </div>
+</body>
+</html>
