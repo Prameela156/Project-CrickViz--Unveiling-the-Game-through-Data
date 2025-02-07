@@ -32,3 +32,5 @@ CrickViz is more than just a project—it’s a testament to my ability to:
 - Enhanced Accessibility – Colorblind-friendly themes and keyboard navigation.  
 
 Whether you're a cricket fan, analyst, or data viz enthusiast, CrickViz will change the way you see IPL stats! 🚀  
+
+### [Click here for CricViz page](https://prameela156.github.io/Project-CrickViz--Unveiling-the-Game-through-Data/)
